@@ -1,0 +1,119 @@
+include html
+snippet {{
+	{{ ${1} }}
+snippet {%
+	{% ${1} %}
+snippet {#
+	{# ${1} #}
+snippet autoescape
+	{% autoescape ${1:on} %}
+		{{ ${2} }}
+	{% endautoescape %}
+	${3}
+snippet block inline #1
+	{% block ${1} %}${2}{% endblock %}${3}
+snippet block block #2
+	{% block ${1} %}
+		${2}
+	{% endblock %}
+	${3}
+snippet comment
+	{% comment %}
+		${1}
+	{% endcomment %}
+	${2}
+snippet cycle
+	{% cycle ${1} as ${2} %}${3}
+snippet debug
+	{% debug %}
+	${1}
+snippet else
+	{% else %}
+	${1}
+snippet extends
+	{% extends "${1}" %}
+	${2}
+snippet filter
+	{% filter ${1} %}
+		${2}
+	{% endfilter %}${3}
+snippet firstof
+	{% firstof ${1} %}
+snippet for
+	{% for ${1} in ${2} %}
+	${3}
+	{% endfor %}
+	${4}
+snippet forempty
+	{% for ${1} in ${2} %}
+		${3}
+	{% empty %}
+		${4}
+	{% endfor %}
+	${5}
+snippet if
+	{% if ${1} %}
+		${2}
+	{% endif %}
+	${3}
+snippet ifin
+	{% if ${1} in ${2} %}
+		${3}
+	{% endif %}
+	${4}
+snippet ifchanged no variable #1
+	{% ifchanged %} ${1} {% endifchanged %}${2}
+snippet ifchanged with variable #2
+	{% ifchanged ${1} %} ${2} {% endifchanged %}${3}
+snippet ifchanged with variable and else #3
+	{% ifchanged ${1} %}
+		${2}
+	{% else %}
+		${3}
+	{% endifchanged %}
+	${4}
+snippet ifequal
+	{% ifequal ${1} %}
+		${2}
+	{% endifequal %}
+	${3}
+snippet ifnotequal
+	{% ifnotequal ${1} ${2} %}
+		${3}
+	{% endifnotequal %}
+	${4}
+snippet ifnotin
+	{% if ${1} not in ${2} %}
+		${3}
+	{% endif %}
+	${4}
+snippet include
+	{% include ${1} %}
+	${2}
+snippet load
+	{% load ${1} %}
+	${2}
+snippet now
+	{% now ${1} %}
+snippet regroup
+	{% regroup ${1} by ${2} as ${3} %}${4}
+snippet spaceless
+	{% spaceless %}
+		${1}
+	{% endspaceless %}
+	${2}
+snippet ssi
+	{% ssi ${1} ${2:parsed} %}${3}
+snippet url
+	{% url ${1} ${2} %}${3}
+snippet widthratio
+	{% widthratio ${1} ${2} ${3} %}${4}
+snippet with
+	{% with ${1} as ${2} %}
+		${3}
+	{% endwith %}
+	${4}
+# another tags
+snippet field
+	<p><label for="id_${1:fieldname}">${2:fieldlabel}</label> {{ form.${1} }}
+	{% if form.${1}.errors %}*** {{ form.${1}.errors|join:", " }} {% endif %}</p>${3}
