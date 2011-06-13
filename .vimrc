@@ -15,35 +15,40 @@ filetype indent on
 
 "noremap K J
 "noremap J K
-"
+
 "noremap h k
 "noremap j h
 "noremap k j
-"
-"noremap gh gk
-"noremap gj gh
-"noremap gk gj
-"
-"noremap zh zk
+" turbo mode
+noremap <A-j> 5j
+noremap <A-k> 5k
+noremap <A-h> 5h
+noremap <A-l> 5l
+
+"oremap gh gk
+"oremap gj gh
+"oremap gk gj
+
+"oremap zh zk
 ""zK does not exist
-"noremap zj zh
-"noremap zJ zH
-"noremap zk zj
+"oremap zj zh
+"oremap zJ zH
+"oremap zk zj
 ""zJ does not exist
 "noremap z<Space> zl
 "noremap z<S-Space> zL
-"noremap z<BS> zh
-"noremap z<S-BS> zH
-"
-"noremap <C-w>h <C-w>k
-"noremap <C-w>H <C-w>K
-"noremap <C-w>j <C-w>h
-"noremap <C-w>J <C-w>H
-"noremap <C-w>k <C-w>j
-"noremap <C-w>K <C-w>J
+"oremap zj zh
+"oremap zJ zH
+
+"oremap <C-w>h <C-w>k
+"oremap <C-w>H <C-w>K
+"oremap <C-w>j <C-w>h
+"oremap <C-w>J <C-w>H
+"oremap <C-w>k <C-w>j
+"oremap <C-w>K <C-w>J
 "noremap <C-w><Space> <C-w>l
 "noremap <C-w><S-Space> <C-w>L
-noremap <C-w><S-BS> <C-w>Hnoremap e d
+"noremap <C-w><S-BS> <C-w>Hnoremap e d
 set fileformats=unix,dos,mac
 " always recognize .tex by suffix:
 let g:tex_flavor = "latex"
@@ -51,12 +56,11 @@ set nu
 set grepprg=grep\ -nH\ $*
 set winaltkeys=no
 "set fencs=ucs-bom,utf-8,gb18030,big5,default
-set fencs=ucs-bom,utf-8,gb18030,big5,iso-8859-1,default
+set fencs=utf-8,gb18030,big5,iso-8859-1,default
 "set fenc=gb18030
 set enc=utf-8
 set tenc=utf-8
 set ambiwidth=single
-"set linebreak
 "set lbr
 set shiftwidth=4
 set softtabstop=4
@@ -71,7 +75,7 @@ set nojs
 set modeline
 
 "wrap the words, and only in break point
-set linebreak
+set nolinebreak
 
 "the follow lines are for beamer-package support in latex-suite
 let g:Tex_FoldedEnvironments="verbatim,comment,eq,subeq,gather,align,math,displaymath,tikzpicture,figure,table,thebibliography,column,keywords,abstract,titlepage,frame"
@@ -105,6 +109,8 @@ let $MANPAGER = "sed -e 's:\\x1B\\[[[:digit:]]\\+m::g'"
 "au BufWinLeave * mkview
 "au BufWinEnter * silent loadview
 "
+" use tidy to reformat xml
+vmap ,x :!tidy -q -i -xml --indent-spaces 4 -utf8<CR>
 
 " for 256 color
 "set t_Co=256
@@ -125,3 +131,4 @@ let g:po_lang_team="Simplified Chinese"
 " hightlight stuffs
 let c_space_errors=1
 let python_highlight_all=1
+au BufRead,BufNewFile *.smali set filetype=smali

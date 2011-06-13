@@ -140,9 +140,15 @@ fun s:BuildTabStops(snip, lnum, col, indent)
 	while stridx(a:snip, '${'.i) != -1
 		let beforeTabStop = matchstr(withoutVars, '^.*\ze${'.i.'\D')
 		let withoutOthers = substitute(withoutVars, '${\('.i.'\D\)\@!\d\+.\{-}}', '', 'g')
+		" if we process {$1:aa}
+		" now the beforeTabStop is the str before {$1
+		" withoutOthers is the whole string without {$1:aa}
 
+		" vim start index from 0, but we let user start index from 1. Thus we
+		" need to recover the true index in vim list
 		let j = i - 1
 		call add(snipPos, [0, 0, -1])
+		" after we add new snipPos element, we 
 		let snipPos[j][0] = a:lnum + s:Count(beforeTabStop, "\n")
 		let snipPos[j][1] = a:indent + len(matchstr(withoutOthers, '.*\(\n\|^\)\zs.*\ze${'.i.'\D'))
 		if snipPos[j][0] == a:lnum | let snipPos[j][1] += a:col | endif

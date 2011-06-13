@@ -119,8 +119,8 @@ if !hasmapto('<Plug>NextTransFwd')
       nmap <buffer> <unique> <LocalLeader>m <Plug>NextTransFwd
    endif
 endif
-inoremap <buffer> <unique> <Plug>NextTransFwd <ESC>/^msgstr\s*""\(\n\n\\|\%$\)<CR>:let @/=""<CR>:call histdel("/", -1)<CR>z.f"a
-nnoremap <buffer> <unique> <Plug>NextTransFwd /^msgstr\s*""\(\n\n\\|\%$\)<CR>:let @/=""<CR>:call histdel("/", -1)<CR><C-L>z.
+inoremap <buffer> <unique> <Plug>NextTransFwd <ESC>/^msgstr\(\[\d\]\)\=\s*""\(\n\n\\|\%$\\|\nmsgstr.*\)<CR>:let @/=""<CR>:call histdel("/", -1)<CR>z.f"a
+nnoremap <buffer> <unique> <Plug>NextTransFwd /^msgstr\(\[\d\]\)\=\s*""\(\n\n\\|\%$\\|\nmsgstr.*\)<CR>:let @/=""<CR>:call histdel("/", -1)<CR><C-L>z.
 
 " Move to the first untranslated msgstr string backward.
 if !hasmapto('<Plug>NextTransBwd')
