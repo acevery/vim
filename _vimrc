@@ -49,25 +49,41 @@ noremap <A-l> 5l
 "noremap <C-w><Space> <C-w>l
 "noremap <C-w><S-Space> <C-w>L
 "noremap <C-w><S-BS> <C-w>Hnoremap e d
+" ========================================
+
+" use tidy to reformat xml and xhtml
+vmap ,x :!tidy -q -i -xml --indent-spaces 4 -utf8<CR>
+vmap ,h :!tidy -q -i -asxhtml --indent-spaces 4 -utf8<CR>
+
 set fileformats=unix,dos,mac
-" always recognize .tex by suffix:
-let g:tex_flavor = "latex"
+" display line number
 set nu
+
 set grepprg=grep\ -nH\ $*
+
 set winaltkeys=no
+
+" file encode part
 "set fencs=ucs-bom,utf-8,gb18030,big5,default
 set fencs=utf-8,gb18030,big5,iso-8859-1,default
 "set fenc=gb18030
 set enc=utf-8
 set tenc=utf-8
+
+" make non-ascii charaters, excluding Chinese characters, to be displaied in
+" single width
 set ambiwidth=single
 "set lbr
+
 set shiftwidth=4
 set softtabstop=4
-set tw=80
 set tabstop=4
 " convert \t to \s * shiftwidth
 set expandtab
+set tw=80
+" do not make linebreak in snippet files
+autocmd FileType snippet set tw=0
+
 " do not join space, which means only insert one space after '.', '!', '?'
 " during join operation
 set nojs
@@ -76,6 +92,13 @@ set modeline
 
 "wrap the words, and only in break point
 set nolinebreak
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"   Plugin Configuration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" always recognize .tex by suffix:
+let g:tex_flavor = "latex"
 
 "the follow lines are for beamer-package support in latex-suite
 let g:Tex_FoldedEnvironments="verbatim,comment,eq,subeq,gather,align,math,displaymath,tikzpicture,figure,table,thebibliography,column,keywords,abstract,titlepage,frame"
@@ -108,9 +131,6 @@ let $MANPAGER = "sed -e 's:\\x1B\\[[[:digit:]]\\+m::g'"
 "endif
 "au BufWinLeave * mkview
 "au BufWinEnter * silent loadview
-"
-" use tidy to reformat xml
-vmap ,x :!tidy -q -i -xml --indent-spaces 4 -utf8<CR>
 
 " for 256 color
 "set t_Co=256
@@ -119,7 +139,15 @@ vmap ,x :!tidy -q -i -xml --indent-spaces 4 -utf8<CR>
 
 let g:html_indent_strict=1
 let g:html_indent_tags="li"
+
+" open javascript fold
+let b:javascript_fold=1
+" javascript syntax highlight for dom, html, and css
+let javascript_enable_domhtmlcss=1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " filetype detect diy
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd BufRead *.vala set efm=%f:%l.%c-%[%^:]%#:\ %t%[%^:]%#:\ %m
 autocmd BufRead *.vapi set efm=%f:%l.%c-%[%^:]%#:\ %t%[%^:]%#:\ %m
 au BufRead,BufNewFile *.vala            setfiletype vala
