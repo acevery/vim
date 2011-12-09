@@ -79,5 +79,7 @@ hi Debug guifg=#1ECFFF gui=bold
 hi Error guibg=#FF0000 guifg=#FFFFFF
 hi Ignore       guifg=grey60
 hi Todo guibg=#FFBFEA guifg=#000000
+hi Pmenu guibg=#FFFEA3 guifg=#1F1F1F
+hi PmenuSel guibg=#1F1F1F guifg=#FFFEA3
 
 "vim: ts=4

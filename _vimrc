@@ -25,6 +25,13 @@ noremap <A-k> 5k
 noremap <A-h> 5h
 noremap <A-l> 5l
 
+" keymaps to save time
+let mapleader = "-"
+nnoremap <leader>e :e<space>
+nnoremap <leader>tn :tabnew<space>
+nnoremap <leader>x :x<return>
+nnoremap <leader>q :q!<return>
+
 "oremap gh gk
 "oremap gj gh
 "oremap gk gj
@@ -50,10 +57,12 @@ noremap <A-l> 5l
 "noremap <C-w><S-Space> <C-w>L
 "noremap <C-w><S-BS> <C-w>Hnoremap e d
 " ========================================
+" formatoption for multibyte characters
+"set formatoptions+=nmB
 
 " use tidy to reformat xml and xhtml
-vmap ,x :!tidy -q -i -xml --indent-spaces 4 -utf8<CR>
-vmap ,h :!tidy -q -i -asxhtml --indent-spaces 4 -utf8<CR>
+vnoremap ,x :!tidy -q -w -i -xml --indent-spaces 4 -utf8<CR>
+vnoremap ,h :!tidy -q -w -i -asxhtml --doctype omit --show-body-only yes --show-warnings no --indent-spaces 4 -utf8<CR>
 
 set fileformats=unix,dos,mac
 " display line number
@@ -64,8 +73,8 @@ set grepprg=grep\ -nH\ $*
 set winaltkeys=no
 
 " file encode part
-"set fencs=ucs-bom,utf-8,gb18030,big5,default
-set fencs=utf-8,gb18030,big5,iso-8859-1,default
+set fencs=ucs-bom,utf-8,gb18030,big5,default
+"set fencs=utf-8,gb18030,iso-8859-1,default
 "set fenc=gb18030
 set enc=utf-8
 set tenc=utf-8
@@ -116,7 +125,7 @@ let g:Tex_Env_tikzpicture="\\begin{tikzpicture}[<+styles+>]\<cr>\\draw<++>\<CR>\
 "let Tlist_Exit_OnlyWindow=1
 nnoremap <silent> <F8> :TlistToggle<CR>
 let g:winManagerWindowLayout='FileExplorer|TagList'
-nmap <silent> <F12> :WMToggle<CR>
+nnoremap <silent> <F12> :WMToggle<CR>
 " make :Man command avaliable
 source $VIMRUNTIME/ftplugin/man.vim
 " Default MANPAGER vimmanpager doesn't play well
@@ -144,6 +153,9 @@ let g:html_indent_tags="li"
 let b:javascript_fold=1
 " javascript syntax highlight for dom, html, and css
 let javascript_enable_domhtmlcss=1
+" for po plugin
+let g:po_translator="Yuwei Yu <acevery@gmail.com>"
+let g:po_lang_team="Simplified Chinese"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " filetype detect diy
@@ -153,10 +165,43 @@ autocmd BufRead *.vapi set efm=%f:%l.%c-%[%^:]%#:\ %t%[%^:]%#:\ %m
 au BufRead,BufNewFile *.vala            setfiletype vala
 au BufRead,BufNewFile *.vapi            setfiletype vala
 "au BufRead,BufNewFile * if &ft == 'htmldjango' | set ft=htmldjango.xhtml | endif
-" for po plugin
-let g:po_translator="Yuwei Yu <acevery@gmail.com>"
-let g:po_lang_team="Simplified Chinese"
 " hightlight stuffs
 let c_space_errors=1
 let python_highlight_all=1
 au BufRead,BufNewFile *.smali set filetype=smali
+" python dict
+autocmd FileType python set dictionary=~/.vim/dict/python.dict
+
+" jquery syntax highlight and snippets
+autocmd BufRead,BufNewFile *.js set ft=javascript.jquery
+" javascript dict
+autocmd FileType javascript set dictionary=~/.vim/dict/javascript.dict
+" javascriptlint
+autocmd FileType javascript set makeprg=jsl\ -nologo\ -nofilelisting\ -nosummary\ -nocontext\ -conf\ '/etc/jsl.conf'\ -process\ %
+autocmd FileType javascript set errorformat=%f(%l):\ %m
+autocmd FileType javascript inoremap <silent> <F9> <C-O>:make<CR>
+autocmd FileType javascript nnoremap <silent> <F9> :make<CR>
+" set indent to 2 in xml
+autocmd FileType xml set sw=2 sts=2 et
+
+" =============================================================================
+" auto completion
+" =================
+" css
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
+"python autocomplete
+autocmd FileType python setlocal omnifunc=pysmell#Complete
+" use pythonTidy.py to format code
+autocmd FileType python vnoremap <F5> :!pytidy<CR>
+" adding comments, m' set context mark, 
+autocmd FileType python nnoremap <buffer> <Leader>c ma0i#<esc>`al
+autocmd FileType gitconfig nnoremap <buffer> <Leader>c ma0i#<esc>`al
+" for easy heading
+autocmd FileType rst let @h = "yypVr"
+
+" disable eclim validation in python file saving
+let g:EclimPythonValidate=0
+let g:EclimXmlValidate=0
+" hide eclim completion preview
+set completeopt=menu

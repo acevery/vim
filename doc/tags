@@ -36,9 +36,15 @@ g:snips_author	snipMate.txt	/*g:snips_author*
 i_CTRL-G_S	surround.txt	/*i_CTRL-G_S*
 i_CTRL-G_s	surround.txt	/*i_CTRL-G_s*
 i_CTRL-R_<Tab>	snipMate.txt	/*i_CTRL-R_<Tab>*
+include	snipMate.txt	/*include*
 list-snippets	snipMate.txt	/*list-snippets*
 macros/rails.vim	rails.txt	/*macros\/rails.vim*
 multi_snip	snipMate.txt	/*multi_snip*
+po-func	po.txt	/*po-func*
+po-history	po.txt	/*po-history*
+po-introduction	po.txt	/*po-introduction*
+po-mappings	po.txt	/*po-mappings*
+po.txt	po.txt	/*po.txt*
 project	project.txt	/*project*
 project-adding-mappings	project.txt	/*project-adding-mappings*
 project-example	project.txt	/*project-example*
@@ -247,6 +253,11 @@ winmanager-plugin	winmanager.txt	/*winmanager-plugin*
 winmanager-settings	winmanager.txt	/*winmanager-settings*
 winmanager-thanks	winmanager.txt	/*winmanager-thanks*
 winmanager-updates	winmanager.txt	/*winmanager-updates*
+xml-plugin-callbacks	xml-plugin.txt	/*xml-plugin-callbacks*
+xml-plugin-html	xml-plugin.txt	/*xml-plugin-html*
+xml-plugin-mappings	xml-plugin.txt	/*xml-plugin-mappings*
+xml-plugin-settings	xml-plugin.txt	/*xml-plugin-settings*
+xml-plugin.txt	xml-plugin.txt	/*xml-plugin.txt*
 yS	surround.txt	/*yS*
 ySS	surround.txt	/*ySS*
 ys	surround.txt	/*ys*
