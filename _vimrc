@@ -165,6 +165,7 @@ autocmd BufRead *.vapi set efm=%f:%l.%c-%[%^:]%#:\ %t%[%^:]%#:\ %m
 au BufRead,BufNewFile *.vala            setfiletype vala
 au BufRead,BufNewFile *.vapi            setfiletype vala
 "au BufRead,BufNewFile * if &ft == 'htmldjango' | set ft=htmldjango.xhtml | endif
+au BufRead,BufNewFile * if &ft == 'php' | set ft=php.xhtml | endif
 " hightlight stuffs
 let c_space_errors=1
 let python_highlight_all=1
@@ -195,7 +196,9 @@ autocmd FileType python setlocal omnifunc=pysmell#Complete
 " use pythonTidy.py to format code
 autocmd FileType python vnoremap <F5> :!pytidy<CR>
 " adding comments, m' set context mark, 
-autocmd FileType python nnoremap <buffer> <Leader>c ma0i#<esc>`al
+autocmd FileType python nnoremap <buffer> ,c ma0i#<esc>`al
+autocmd FileType c nnoremap <buffer> ,c maI/* <esc>A */<esc>`a3l
+"autocmd FileType c nnoremap <buffer> <Leader>c ma:s/^\( *\)\(.*\)$/\1\/\* \2 \*\//<esc>`al:noh<cr>
 autocmd FileType gitconfig nnoremap <buffer> <Leader>c ma0i#<esc>`al
 " for easy heading
 autocmd FileType rst let @h = "yypVr"

@@ -4,6 +4,49 @@ fun! Filename(...)
 	return !a:0 || a:1 == '' ? filename : substitute(a:1, '$1', filename, 'g')
 endf
 
+fun! GObjectNS()
+	let fnlist = split(expand('%:t:r'), '[-_]')
+	if len(fnlist) >1
+		return toupper(join(fnlist[:-2], '_'))
+	endif
+	return 'NAMESPACE'
+endf
+
+fun! GObjectMO()
+	let fnlist = split(expand('%:t:r'), '[-_]')
+	if len(fnlist) >1
+		return toupper(fnlist[-1])
+	endif
+	return 'MODULE'
+endf
+
+fun! GObjectNs()
+	let fnlist = split(tolower(expand('%:t:r')), '[-_]')
+	if fnlist[0] == 'ibus'
+		let fnlist[0] = 'IBus'
+	endif
+	if len(fnlist) >1
+		return join(map(fnlist[:-2], 'toupper(v:val[0]).v:val[1:]'), '')
+	endif
+	return 'Namespace'
+endf
+
+fun! GObjectMo()
+	let fnlist = split(expand('%:t:r'), '[-_]')
+	if len(fnlist) >1
+		return toupper(fnlist[-1][0]).fnlist[-1][1:]
+	endif
+	return 'Module'
+endf
+
+fun! GObjectNsm()
+	let fnlist = split(expand('%:t:r'), '[-_]')
+	if len(fnlist) >1
+		return tolower(join(fnlist, '_'))
+	endif
+	return 'namespace_module'
+endf
+
 fun s:RemoveSnippet()
 	unl! g:snipPos s:curPos s:snipLen s:endCol s:endLine s:prevLen
 	     \ s:lastBuf s:oldWord

@@ -9,7 +9,7 @@ set guifont=Lucida\ Sans\ Typewriter\ Std\ 12
 "set guifontwide=Adobe\ Heiti\ Std\ R\ 18
 set guifontwide=Microsoft\ Yahei\ 12
 "set guifontwide=FangSong\ 16
-set guioptions=aegirL
+set guioptions=aegirmbLp
 " -- set guitablabel
 " set up tab labels with tab number, buffer name, number of windows
 function! GuiTabLabel()
