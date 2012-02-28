@@ -78,7 +78,7 @@ snippet doct
 	"http://www.w3.org/TR/html4/loose.dtd">
 # HTML Doctype 5
 snippet doct5
-	<!DOCTYPE html>
+	<!doctype html>
 # XHTML Doctype 1.0 Frameset
 snippet docxf
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
@@ -112,19 +112,19 @@ snippet body
 	</body>
 snippet head
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"`Close()`>
+		<meta charset="utf-8"`Close()`>
 		<title>${1:`substitute(Filename('', 'Page Title'), '^.', '\u&', '')`}</title>${2}
 	</head>
 snippet title
 	<title>${1:`substitute(Filename('', 'Page Title'), '^.', '\u&', '')`}</title>${2}
 snippet script
-	<script type="text/javascript" charset="utf-8">
+	<script type="text/javascript">
 	// <![CDATA[
 		${1}
 	// ]]>
 	</script>${2}
 snippet scriptsrc
-	<script src="${1}.js" type="text/javascript" charset="utf-8"></script>${2}
+	<script src="${1}.js"></script>${2}
 snippet style
 	<style type="text/css" media="${1:screen}">
 		${2}
@@ -144,7 +144,7 @@ snippet span
 snippet div
 	<div id="${1:name}">
 		${2}
-	</div>
+	</div><!-- #$1 -->
 snippet ol
 	<ol${1}>
 		<li${2}>${3}</li>
@@ -174,7 +174,7 @@ snippet fieldset
 		<legend>${1:name}</legend>
 
 		${3}
-	</fieldset>
+	</fieldset><!-- #$1 -->
 snippet form
 	<form action="${1:`Filename('$1_submit')`}" method="${2:get}" accept-charset="utf-8">
 		${3}
@@ -195,7 +195,7 @@ snippet img
 snippet label
 	<label for="${2:$1}">${1:name}</label><input type="${3:text/submit/hidden/button}" name="${4:$2}" value="${5}" id="${6:$2}"`Close()`>${7}
 snippet link
-	<link rel="${1:stylesheet}" type="${2:text/css}" href="${2:/css/master.css}" `Close()`>${4}
+	<link rel="${1:stylesheet}" href="${2:/css/master.css}"`Close()`>${4}
 snippet mailto
 	<a href="mailto:${1:joe@example.com}?subject=${2:feedback}">${3:email me}</a>
 snippet meta
@@ -221,3 +221,40 @@ snippet td
 	<td>${1:Data}</td>${2}
 snippet textarea
 	<textarea name="${1:Name}" rows="${2:8}" cols="${3:40}">${4}</textarea>${5}
+snippet header
+	<header>
+		${1}
+	</header>
+snippet nav
+	<nav>
+		${1}
+	</nav>
+snippet article
+	<article>
+		${1}
+	</article>
+snippet aside
+	<aside>
+		${1}
+	</aside>
+snippet footer
+	<footer>
+		${1}
+	</footer>
+snippet section section id
+	<section id="${1:id}">
+		${2}
+	</section><!-- #$1 -->
+snippet section section
+	<section>${1}</section>
+snippet hgroup
+	<hgroup>
+		<h1>${1}</h1>
+		<h2>${2}</h2>
+	</hgroup>
+snippet figure
+	<figure${1}>
+		${2}
+	</figure>
+snippet figcaption
+	<figcaption>${1}</figcaption>

@@ -208,3 +208,30 @@ let g:EclimPythonValidate=0
 let g:EclimXmlValidate=0
 " hide eclim completion preview
 set completeopt=menu
+" set .h to c header file
+let g:c_syntax_for_h=1
+" allow vim to shift between modified buffer without saving
+set hidden
+
+let g:IAutoScrollMode="keep"
+let g:IAutoScrollLines=3
+
+set statusline=%F%m%r%h%w\ [%{&ff}]\ [%Y]\ [ASCII=\%b]\ [HEX=\%B]\ [POS=%l,%c%V]\ [%p%%]\ [LEN=%L]
+set laststatus=2
+set cursorline
+
+" faster navigation in multibuffers
+map <silent> <C-up> <ESC>:bp<CR>
+map <silent> <C-down> <ESC>:bn<CR>
+" faster navigation in tabs
+map <silent> <C-right> <ESC>:tabn<CR>
+map <silent> <C-left> <ESC>:tabp<CR>
+map <silent> <A-1> <ESC>1gt
+map <silent> <A-2> <ESC>2gt
+map <silent> <A-3> <ESC>3gt
+map <silent> <A-4> <ESC>4gt
+map <silent> <A-5> <ESC>5gt
+map <silent> <A-6> <ESC>6gt
+map <silent> <A-7> <ESC>7gt
+map <silent> <A-8> <ESC>8gt
+map <silent> <A-9> <ESC>9gt

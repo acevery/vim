@@ -1,7 +1,7 @@
 " Filename: iautoscroll.vim
 " Author: Yu Yuwei <acevery@gmail.com>
-" Verson: 0.6
-" Last Modify: Dec 19, 2008
+" Verson: 0.7
+" Last Modify: Feb 28, 2012
 " Function: Scrolling to center when cursor hit the last/first line in window
 "      while inserting
 " Usage: put this file into ~/.vim/plugin,
@@ -15,6 +15,8 @@
 "        when number is bigger than half of the window height,
 "        we just scroll to center
 " Changlog:
+"   0.7: Feb 28, 2012
+"       Improve performance
 "   0.6: Dec 19, 2008
 "       Add g:IAutoScrollLines Variable
 "       Add "keep" mode in g:IAutoScrollMode
@@ -46,34 +48,66 @@ if !exists("IAutoScrollLines")
     let IAutoScrollLines=0
 endif
 
+if !exists("IAutoScrollMark")
+    let IAutoScrollMark="a"
+endif
+
+if !exists("IAutoScrollWheelScrollLines")
+    let IAutoScrollWheelScrollLines=3
+endif
+
+"  get the window height
+let w:winht = winheight(winnr())
+
+
+autocmd! VimEnter * silent call ICheck_Window() 
+autocmd! VimResized * silent call ICheck_Window() 
 autocmd! CursorMovedI * silent call ICheck_Scroll()
+
+function ICheck_Window()
+    let w:winht = winheight(winnr())
+
+    if g:IAutoScrollMode == "keep" && g:IAutoScrollLines > 0
+        " prepare local variable to keep lines
+        if g:IAutoScrollLines > (w:winht-2)/2
+            let w:keeplines = (w:winht-2)/2
+        else
+            let w:keeplines = g:IAutoScrollLines
+        endif
+        let w:keeplines_low = w:winht+1 - w:keeplines
+    endif
+
+endfunction
+
 
 function ICheck_Scroll()
     " we only check scroll when enabled:)
     if g:IAutoScrollMode == "scroll"
         " first, get the line number in window
         let cursor_line_no = winline()
-        " second, get the window height
-        let winht = winheight(winnr())
-        " if we hit the bottom,
-        if cursor_line_no == winht || cursor_line_no == 1
+        " if we hit the bottom or top
+        if cursor_line_no == w:winht || cursor_line_no == 1
             " now store get the current line and column
             let cur_line = line('.')
             let cur_col = col('.')
             " OK, we are ready to move :)
-            if g:IAutoScrollLines == 0 || g:IAutoScrollLines >= winht/2
+            if g:IAutoScrollLines == 0 || g:IAutoScrollLines >= w:winht/2
                 " default behavior
                 exec "normal zz"
             else
                 " follow user's config
-                let l:scroll_lines = g:IAutoScrollLines
-                " now check is on bottom or top
-                if cursor_line_no == winht
-                    " now do the scroll
-                    exec "normal ".l:scroll_lines."j".l:scroll_lines."k"
+                let windict = winsaveview()
+                if cursor_line_no == w:winht
+                    let windict["topline"] += g:IAutoScrollLines
                 else
-                    exec "normal ".l:scroll_lines."k".l:scroll_lines."j"
+                    let windict["topline"] -= g:IAutoScrollLines
+                    if windict["topline"] < 0
+                        let windict["topline"] = 0
+                    endif
                 endif
+                call winrestview(windict)
+
+            "elseif cursor_line_no <= l:keeplines 
             endif
             " we need move cursor back to the original place,
             " otherwise insert mode in new line
@@ -83,25 +117,17 @@ function ICheck_Scroll()
     elseif g:IAutoScrollMode == "keep" && g:IAutoScrollLines > 0
         " first, get the line number in window
         let cursor_line_no = winline()
-        " second, get the window height
-        let winht = winheight(winnr())
-        " prepare local variable to keep lines
-        if g:IAutoScrollLines > (winht-2)/2
-            let l:keeplines = (winht-2)/2
-        else
-            let l:keeplines = g:IAutoScrollLines
-        endif
 
-        if cursor_line_no >= winht+1 - l:keeplines || cursor_line_no <= l:keeplines
+        if cursor_line_no >= w:keeplines_low || cursor_line_no <= w:keeplines + 1
             " we are in lines keep zone
             let windict = winsaveview()
-            if cursor_line_no <= l:keeplines 
-                let windict["topline"] -=  l:keeplines - cursor_line_no
-                if windict["topline"] < 0
-                    let windict["topline"] = 0
-                endif
+            if cursor_line_no <= w:keeplines + 1
+                let windict["topline"] -=  w:keeplines + 1 - cursor_line_no
             else
-                let windict["topline"] += cursor_line_no - (winht-l:keeplines)
+                let windict["topline"] += cursor_line_no - (w:winht-w:keeplines)
+            endif
+            if windict["topline"] < 0
+                let windict["topline"] = 0
             endif
             call winrestview(windict)
 
@@ -109,3 +135,4 @@ function ICheck_Scroll()
         endif
     endif
 endfunction
+" exec "normal ".l:scroll_lines."j".l:scroll_lines."k"

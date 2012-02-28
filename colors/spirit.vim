@@ -21,6 +21,8 @@ hi LineNr       guifg=#82A9DC gui=italic,bold
 
 " highlight groups
 hi Cursor       guibg=#f0f0f0 guifg=#00071A
+hi CursorLine guibg=#000F38 ctermbg=lightgray
+hi CursorColumn guibg=#000F38 ctermbg=lightgray
 hi VertSplit guibg=#C0FFFF guifg=#075554 gui=none
 hi Folded               guibg=#C0CCFF guifg=black
 hi FoldColumn   guibg=#800080 guifg=tan
