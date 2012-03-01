@@ -184,8 +184,8 @@ fun s:BuildTabStops(snip, lnum, col, indent)
 		let beforeTabStop = matchstr(withoutVars, '^.*\ze${'.i.'\D')
 		let withoutOthers = substitute(withoutVars, '${\('.i.'\D\)\@!\d\+.\{-}}', '', 'g')
 		" if we process {$1:aa}
-		" now the beforeTabStop is the str before {$1
-		" withoutOthers is the whole string without {$1:aa}
+		" now the beforeTabStop is the str before ${1
+		" withoutOthers is the whole string without ${2:aa} and ${3} etc.
 
 		" vim start index from 0, but we let user start index from 1. Thus we
 		" need to recover the true index in vim list

@@ -213,12 +213,11 @@ let g:c_syntax_for_h=1
 " allow vim to shift between modified buffer without saving
 set hidden
 
-let g:IAutoScrollMode="keep"
+let g:IAutoScrollMode="scroll"
 let g:IAutoScrollLines=3
 
 set statusline=%F%m%r%h%w\ [%{&ff}]\ [%Y]\ [ASCII=\%b]\ [HEX=\%B]\ [POS=%l,%c%V]\ [%p%%]\ [LEN=%L]
 set laststatus=2
-set cursorline
 
 " faster navigation in multibuffers
 map <silent> <C-up> <ESC>:bp<CR>
@@ -235,3 +234,5 @@ map <silent> <A-6> <ESC>6gt
 map <silent> <A-7> <ESC>7gt
 map <silent> <A-8> <ESC>8gt
 map <silent> <A-9> <ESC>9gt
+" for line number toggle
+let g:NumberToggleTrigger="<A-n>"

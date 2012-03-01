@@ -60,8 +60,9 @@ endif
 let w:winht = winheight(winnr())
 
 
-autocmd! VimEnter * silent call ICheck_Window() 
-autocmd! VimResized * silent call ICheck_Window() 
+autocmd! VimEnter * silent call ICheck_Window()
+autocmd! WinEnter * silent call ICheck_Window()
+autocmd! VimResized * silent call ICheck_Window()
 autocmd! CursorMovedI * silent call ICheck_Scroll()
 
 function ICheck_Window()
