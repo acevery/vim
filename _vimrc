@@ -236,3 +236,6 @@ map <silent> <A-8> <ESC>8gt
 map <silent> <A-9> <ESC>9gt
 " for line number toggle
 let g:NumberToggleTrigger="<A-n>"
+
+" cd to the directory of current file
+autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | silent! lcd %:p:h | endif

@@ -173,19 +173,36 @@ fun! TriggerSnippet()
 		call feedkeys("\<tab>") | return ''
 	endif
 
-	if exists('g:snipPos') | return snipMate#jumpTabStop(0) | endif
 
 	let word = matchstr(getline('.'), '\S\+\%'.col('.').'c')
-	for scope in [bufnr('%')] + split(&ft, '\.') + ['_']
-		let [trigger, snippet] = s:GetSnippet(word, scope)
-		" If word is a trigger for a snippet, delete the trigger & expand
-		" the snippet.
-		if snippet != ''
-			let col = col('.') - len(trigger)
-			sil exe 's/\V'.escape(trigger, '/\.').'\%#//'
-			return snipMate#expandSnip(snippet, col)
-		endif
-	endfor
+	" we only get the snippet if the word is not the word before the $i or name
+	" in ${i:name}
+	if !(exists('g:snipPos') && exists('g:curPos') && (g:snipPos[g:curPos][3][0] == word || g:snipPos[g:curPos][3][1] == word))
+		for scope in [bufnr('%')] + split(&ft, '\.') + ['_']
+			let [trigger, snippet] = s:GetSnippet(word, scope)
+			" If word is a trigger for a snippet, delete the trigger & expand
+			" the snippet.
+			if snippet != ''
+				" we only expand the trigger if it is not the word before the $i or name
+				" in ${i:name}
+				if exists('g:snipPos') && exists('g:curPos')
+					if g:snipPos[g:curPos][3][1] == trigger
+						continue
+					endif
+					let [drop_trigger, drop_snippet] = s:GetSnippet(g:snipPos[g:curPos][3][0], scope)
+					if drop_trigger == trigger
+						continue
+					endif
+				endif
+
+				let col = col('.') - len(trigger)
+				sil exe 's/\V'.escape(trigger, '/\.').'\%#//'
+				return snipMate#expandSnip(snippet, col)
+			endif
+		endfor
+	endif
+
+	if exists('g:snipPos') | return snipMate#jumpTabStop(0) | endif
 
 	if exists('SuperTabKey')
 		call feedkeys(SuperTabKey)
