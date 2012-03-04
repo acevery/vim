@@ -1,1 +1,0 @@
-/home/acevery/programming/git-source/snipmate.vim/after/plugin/snipMate.vim

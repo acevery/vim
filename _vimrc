@@ -31,7 +31,8 @@ nnoremap <leader>e :e<space>
 nnoremap <leader>tn :tabnew<space>
 nnoremap <leader>x :x<return>
 nnoremap <leader>q :q!<return>
-
+" load pathogen
+call pathogen#infect()
 "oremap gh gk
 "oremap gj gh
 "oremap gk gj
@@ -190,7 +191,8 @@ autocmd FileType xml set sw=2 sts=2 et
 " =================
 " css
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 "python autocomplete
 autocmd FileType python setlocal omnifunc=pysmell#Complete
 " use pythonTidy.py to format code
