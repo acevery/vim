@@ -1,3 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
-let g:netrw_dirhist_1='/home/acevery/.vim'
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/acevery/programming/python/django/zhaoban/colleges'
+let g:netrw_dirhist_2='/home/acevery/programming/git-source/ihosted/acevery-portage/sys-fs/yaffs2utils/files'
+let g:netrw_dirhist_3='/home/acevery/programming/python/django/zhaoban/sendfile'
+let g:netrw_dirhist_4='/home/acevery/.projectM'
+let g:netrw_dirhist_5='/home/acevery/programming/python/django/admission/staticfiles'

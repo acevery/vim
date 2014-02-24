@@ -173,6 +173,7 @@ let python_highlight_all=1
 au BufRead,BufNewFile *.smali set filetype=smali
 " python dict
 autocmd FileType python set dictionary=~/.vim/dict/python.dict
+autocmd FileType python set foldmethod=indent
 
 " jquery syntax highlight and snippets
 autocmd BufRead,BufNewFile *.js set ft=javascript.jquery
@@ -192,6 +193,7 @@ autocmd FileType xml set sw=2 sts=2 et
 " css
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType html,markdown set tw=0
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 "python autocomplete
 autocmd FileType python setlocal omnifunc=pysmell#Complete
@@ -223,21 +225,44 @@ set laststatus=2
 
 " faster navigation in multibuffers
 map <silent> <C-up> <ESC>:bp<CR>
+imap <silent> <C-up> <C-O>:bp<CR>
 map <silent> <C-down> <ESC>:bn<CR>
+imap <silent> <C-down> <C-O>:bn<CR>
 " faster navigation in tabs
 map <silent> <C-right> <ESC>:tabn<CR>
+imap <silent> <C-right> <C-O>:tabn<CR>
 map <silent> <C-left> <ESC>:tabp<CR>
+imap <silent> <C-left> <C-O>:tabp<CR>
 map <silent> <A-1> <ESC>1gt
+"imap <silent> <A-1> <C-O>1gt<CR>
+imap <silent> <A-1> <ESC>1gt
 map <silent> <A-2> <ESC>2gt
+"imap <silent> <A-2> <C-O>2gt<CR>
+imap <silent> <A-2> <ESC>2gt
 map <silent> <A-3> <ESC>3gt
+"imap <silent> <A-3> <C-O>3gt<CR>
+imap <silent> <A-3> <ESC>3gt
 map <silent> <A-4> <ESC>4gt
+"imap <silent> <A-4> <C-O>4gt<CR>
+imap <silent> <A-4> <ESC>4gt
 map <silent> <A-5> <ESC>5gt
+"imap <silent> <A-5> <C-O>5gt<CR>
+imap <silent> <A-5> <ESC>5gt
 map <silent> <A-6> <ESC>6gt
+"imap <silent> <A-6> <C-O>6gt<CR>
+imap <silent> <A-6> <ESC>6gt
 map <silent> <A-7> <ESC>7gt
+"imap <silent> <A-7> <C-O>7gt<CR>
+imap <silent> <A-7> <ESC>7gt
 map <silent> <A-8> <ESC>8gt
+"imap <silent> <A-8> <CR>8gt<CR>
+imap <silent> <A-8> <ESC>8gt
 map <silent> <A-9> <ESC>9gt
+"imap <silent> <A-9> <C-O>9gt<CR>
+imap <silent> <A-9> <ESC>9gt
 " for line number toggle
-let g:NumberToggleTrigger="<A-n>"
+"let g:NumberToggleTrigger="<A-n>"
 
-" cd to the directory of current file
-autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | silent! lcd %:p:h | endif
+" cd to the directory of current file if the target file not in /tmp or not tags
+" in current working directory
+"autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' && findfile(getcwd()."/tags") == '' | silent! lcd %:p:h | endif
