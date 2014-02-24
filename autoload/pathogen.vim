@@ -1,0 +1,1 @@
+/home/acevery/programming/git-source/vim-pathogen/autoload/pathogen.vim
