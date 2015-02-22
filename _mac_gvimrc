@@ -1,5 +1,6 @@
 " no use inkpot in gui
 color spirit
+set transparency=8
 " set the single byte width char used font:
 "set guifont=DejaVu\ Sans\ Mono\ 16
 "set guifont=Lucida\ Sans\ Typewriter\ Std\ 13

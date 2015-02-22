@@ -1,5 +1,6 @@
 filetype plugin on
 filetype indent on
+syntax on
 " Remapping for Colemak
 " ----------------------
 
@@ -145,7 +146,7 @@ let $MANPAGER = "sed -e 's:\\x1B\\[[[:digit:]]\\+m::g'"
 " for 256 color
 "set t_Co=256
 
-"colo inkpot
+colo desert
 
 let g:html_indent_strict=1
 let g:html_indent_tags="li"
