@@ -1,6 +1,29 @@
-filetype plugin on
-filetype indent on
 syntax on
+set nocompatible
+filetype off
+
+" set the runtime path to include Vundle and initalize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+" Git plugin on my own machine
+" Plugin 'file:///Users/acevery/programming/git-source/snipmate-plus'
+" Snipmate
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+" Optional:
+Plugin 'honza/vim-snippets'
+" Surround 
+Plugin 'tpope/vim-surround'
+" code auto formater
+Plugin 'Chiel92/vim-autoformat'
+" All of you Plugins must be add before the following line
+call vundle#end()
+filetype plugin indent on
+" enable search highlight
+set hlsearch
 " Remapping for Colemak
 " ----------------------
 
@@ -32,8 +55,6 @@ nnoremap <leader>e :e<space>
 nnoremap <leader>tn :tabnew<space>
 nnoremap <leader>x :x<return>
 nnoremap <leader>q :q!<return>
-" load pathogen
-call pathogen#infect()
 "oremap gh gk
 "oremap gj gh
 "oremap gk gj
@@ -267,3 +288,6 @@ imap <silent> <A-9> <ESC>9gt
 " cd to the directory of current file if the target file not in /tmp or not tags
 " in current working directory
 "autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' && findfile(getcwd()."/tags") == '' | silent! lcd %:p:h | endif
+
+" Assign a key for auto format
+noremap <F3> :Autoformat<CR><CR>
